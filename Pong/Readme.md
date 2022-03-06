@@ -1,6 +1,6 @@
 # Pong
 
-Game of Pong. Two player, using Up/Down cursor keys and A/Z. UTF8 sprites. Angle dtermined by point of contact. 
+Game of Pong. Two player, using Up/Down cursor keys and A/Z. UTF8 sprites. Angle determined by point of contact. 
 Scores displayed using UTF8 block characters.
 
 ## Files:
