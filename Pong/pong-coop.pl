@@ -8,7 +8,7 @@ use utf8;                       # allow utf characters in print
 binmode STDOUT, ":utf8";
 
 
-my $sprite=new Sprite(x=>20, y=>19, dx=>1, dy=>.5,ddx=>0, ddy=>0, maxX=>70,minX=>10, maxY=>20,minY=>4, mass=>1,
+my $sprite=new Sprite(x=>20, y=>19, dx=>1, dy=>.5,ddx=>0, ddy=>0, maxX=>70,minX=>10, maxY=>19,minY=>4, mass=>1,
 	        spriteData=>[[qw/▟ ▙ /],[qw/▜ ▛/]],
 	        spriteColour=>[["red","yellow"],["green", "blue"]]);
 
@@ -321,15 +321,22 @@ sub colour{
 
 
 sub bigDigit{
-	my($digit,$colour)=@_;
-	
+	my $bigDigits=
+	[["▞▚ ","▞▌  ", "▞▚ ","▞▚ ",  " ▞▌" ,"▛▀  ","▞▚ ","▀▜ ","▞▚ ","▞▚ "],
+	 ["▌▐ ", " ▌  ", "▗▞ ", " ▚ ", "▟▄▙" ,"▀▚  ","▙▖ ", " ▞ ","▞▚ ","▝▜ "],
+	 ["▚▞ ","▄▙▖ ","▙▄ ","▚▞ ",  "  ▌ ","▚▞  ","▚▞ ","▞   ","▚▞ ", "▚▞ "]];
 
-my $bigDigits=
-	[["▞▚ ","▞▌  ","▞▚ ","▞▚ ", " ▞▌" ,"▛▀  ","▞▚ ","▀▜ ","▞▚ ","▞▚ "],
-	 ["▌▐ ", " ▌  ","▗▞ ", " ▚ ","▟▄▙" ,"▀▚  ","▙▖ ", " ▞ ","▞▚ ","▝▜ "],
-	 ["▚▞ ","▄▙▖","▙▄ ","▚▞ ",  "  ▌ ","▚▞  ","▚▞ ","▞   ","▚▞ ","▚▞ "]];
-	my $d=[colour($colour).$bigDigits->[0]->[$digit],$bigDigits->[1]->[$digit],$bigDigits->[2]->[$digit].colour("reset")];
-	return $d;
+	my($number,$colour)=@_;
+	my @row=(colour($colour),"","");
+	foreach my $digit (split("",$number)){
+		foreach (0..2){
+		   $row[$_].=$bigDigits->[$_]->[$digit];
+	    }
+	}
+	$row[2]=$row[2].colour("reset");
+	return \@row;
 }
+
+
 
 1;

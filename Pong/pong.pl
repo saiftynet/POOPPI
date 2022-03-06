@@ -8,7 +8,7 @@ use utf8;                       # allow utf characters in print
 binmode STDOUT, ":utf8";
 
 
-my $sprite={x=>20, y=>19, dx=>1, dy=>.5,ddx=>0, ddy=>0, maxX=>70,minX=>10, maxY=>20,minY=>4, mass=>1,
+my $sprite={x=>20, y=>19, dx=>1, dy=>.5,ddx=>0, ddy=>0, maxX=>70,minX=>10, maxY=>19,minY=>4, mass=>1,
 	        spriteData=>[[qw/▟ ▙ /],[qw/▜ ▛/]],
 	        spriteColour=>[["red","yellow"],["green", "blue"]]};
 paintSprite($sprite);
@@ -27,14 +27,20 @@ my $player1= {name=>"Player1",score=>0};
 my $player2= {name=>"Player2",score=>0};
 
 my $bigDigits=
-	[["▞▚ ","▞▌  ","▞▚ ","▞▚ ", " ▞▌" ,"▛▀  ","▞▚ ","▀▜ ","▞▚ ","▞▚ "],
-	 ["▌▐ ", " ▌  ","▗▞ ", " ▚ ","▟▄▙" ,"▀▚  ","▙▖ ", " ▞ ","▞▚ ","▝▜ "],
-	 ["▚▞ ","▄▙▖","▙▄ ","▚▞ ",  "  ▌ ","▚▞  ","▚▞ ","▞   ","▚▞ ","▚▞ "]];
+	[["▞▚ ","▞▌  ", "▞▚ ","▞▚ ",  " ▞▌" ,"▛▀  ","▞▚ ","▀▜ ","▞▚ ","▞▚ "],
+	 ["▌▐ ", " ▌  ", "▗▞ ", " ▚ ", "▟▄▙" ,"▀▚  ","▙▖ ", " ▞ ","▞▚ ","▝▜ "],
+	 ["▚▞ ","▄▙▖ ","▙▄ ","▚▞ ",  "  ▌ ","▚▞  ","▚▞ ","▞   ","▚▞ ", "▚▞ "]];
 
 sub bigDigit{
-	my($digit,$colour)=@_;
-	my $d=[colour($colour).$bigDigits->[0]->[$digit],$bigDigits->[1]->[$digit],$bigDigits->[2]->[$digit].colour("reset")];
-	return $d;
+	my($number,$colour)=@_;
+	my @row=(colour($colour),"","");
+	foreach my $digit (split("",$number)){
+		foreach (0..2){
+		   $row[$_].=$bigDigits->[$_]->[$digit];
+	    }
+	}
+	$row[2]=$row[2].colour("reset");
+	return \@row;
 }
 
 my $keyActions={
@@ -300,6 +306,7 @@ sub stripColours{
 
 sub colour{
   my ($fmts)=@_;
+  return "" if ($^O =~/Win/);
   return "" unless $fmts;
   my @formats=map {lc $_} split / +/,$fmts;   
   my %colours=(black   =>30,red   =>31,green   =>32,yellow   =>33,blue   =>34,magenta   =>35,cyan  =>36,white   =>37,
