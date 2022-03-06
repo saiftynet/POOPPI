@@ -1,7 +1,7 @@
 # Pong
 
 Game of Pong. Two player, using Up/Down cursor keys and A/Z. UTF8 sprites. Angle determined by point of contact. 
-Scores displayed using UTF8 block characters.
+Scores displayed using UTF8 block characters.  Needs an ANSI capable terminal for colour.
 
 ## Files:
 1) pong.pl   Non object orientated clone of PONG: depends on Term::ReadKey, Time::Hires, utf8
