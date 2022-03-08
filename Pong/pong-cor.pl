@@ -206,7 +206,6 @@ method reflectXAngled{ #refkecting $self according to dCog between $b and $self
 	$self->reflectX();
 }
 
-
 method collide{ # detect contact with sprite $b
 	my ($b)=@_;
 	my  ($ax1,$ax2,$ay1,$ay2,$bx1,$bx2,$by1,$by2) =
@@ -231,19 +230,18 @@ method dCog{ # displacement of cogs $b vs $self;
 	return [$cogA->[0]-$cogB->[0],$cogA->[1]-$cogB->[1]];
 }
 
-
 ##generic matrix manipulation
 
-sub flipV{
+method flipV{
 	my $matrix=shift;	
 	@$matrix=reverse @$matrix;  #$matrix=[reverse @$matrix] doesnt work...
 }
 
-sub flipH{
+method flipH{
 	my $matrix=shift;	
 	$matrix->[$_]=[reverse @{$matrix->[$_]}] foreach(0..(scalar @{$matrix}-1));
 }
-sub transpose{
+method transpose{
 	my $matrix=shift;
 	my $columns=scalar @{$matrix->[0]};
 	my $rows=scalar @$matrix;
@@ -257,25 +255,28 @@ sub transpose{
 	@$matrix=@$transposed;	
 }
 
-sub rotate{
+method rotate{
 	my ($matrix,$rotation)=@_;
 	if ($rotation=~/^cw|90$/){
-		transpose($matrix);
-		flipV($matrix);
+		$self->transpose($matrix);
+		$self->flipV($matrix);
 	}
 	elsif ($rotation=~/^180/){
-		flipV($matrix);
-		flipH($matrix);
+		$self->flipV($matrix);
+		$self->flipH($matrix);
 	}
 	elsif ($rotation=~/^cxw|270$/){
-		transpose($matrix);
-		flipH($matrix);
+		$self->transpose($matrix);
+		$self->flipH($matrix);
 	}
 }
 
 
 
 }
+
+
+
 
 
 package Display;
