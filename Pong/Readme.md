@@ -4,9 +4,9 @@ Game of Pong. Two player, using Up/Down cursor keys and A/Z. UTF8 sprites. Angle
 Scores displayed using UTF8 block characters.  Needs an ANSI capable terminal for colour.
 
 ## Files:
-1) pong.pl   Non object orientated clone of PONG: depends on Term::ReadKey, Time::Hires, utf8
-2) pong-coop.pl   Uses classic packages
-3) pong-cor.pl    Uses Object pad
+1) [pong.pl](https://github.com/saiftynet/POOPPI/blob/main/Pong/pong.pl)   Non object orientated clone of PONG: depends on Term::ReadKey, Time::Hires, utf8
+2) [pong-coop.pl](https://github.com/saiftynet/POOPPI/blob/main/Pong/pong-coop.pl)   Uses classic packages
+3) [pong-cor.pl](https://github.com/saiftynet/POOPPI/blob/main/Pong/pong-cor.pl)    Uses Object pad
 4) etc.
 
 ![Pong](https://github.com/saiftynet/dummyrepo/blob/main/Pooppi/pong.gif)
