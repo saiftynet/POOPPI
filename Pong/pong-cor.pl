@@ -278,9 +278,6 @@ sub rotate{
 }
 
 
-
-
-
 package Display;
 
 sub paintChar{
