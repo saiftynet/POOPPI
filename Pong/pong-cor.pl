@@ -279,7 +279,7 @@ method rotate{
 
 
 
-package Display;
+role Display{
 
 sub paintChar{
 	my ($char,$colour)=@_;
@@ -342,6 +342,6 @@ sub bigDigit{
 	return \@row;
 }
 
-
+}
 
 1;
